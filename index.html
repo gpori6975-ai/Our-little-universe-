@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hey, My Love ❤️</title>
+<title>For My Jann 🤍</title>
 
 <style>
 * {
@@ -12,345 +12,624 @@
 
 body {
   margin: 0;
-  min-height: 100vh;
   background: #fffafa;
-  color: #57232f;
-  font-family: Georgia, serif;
-  overflow-x: hidden;
-}
-
-.heart {
-  position: fixed;
-  bottom: -30px;
-  color: #e94d70;
-  pointer-events: none;
-  animation: float 8s linear infinite;
-  z-index: 0;
-}
-
-@keyframes float {
-  0% { transform: translateY(0); opacity: 0; }
-  15% { opacity: .6; }
-  100% { transform: translateY(-110vh); opacity: 0; }
-}
-
-main {
-  max-width: 600px;
-  margin: auto;
-  min-height: 100vh;
-  padding: 24px 20px 45px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
-}
-
-.card {
-  background: white;
-  border: 1px solid #f5d5dd;
-  border-radius: 28px;
-  padding: 30px 20px;
+  font-family: Arial, sans-serif;
   text-align: center;
-  box-shadow: 0 12px 45px #b72d4c12;
+  color: #c51e43;
 }
 
-.top-heart {
-  font-size: 45px;
-  margin-bottom: 12px;
+.page {
+  display: none;
+  min-height: 100vh;
+  padding: 25px 16px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.tag {
-  font: 11px Arial, sans-serif;
-  letter-spacing: 3px;
-  color: #d94c6c;
-  text-transform: uppercase;
+.page.active {
+  display: flex;
 }
 
 h1 {
-  font-size: clamp(30px, 8vw, 43px);
-  font-weight: normal;
-  line-height: 1.2;
-  margin: 18px 0;
-  color: #9f233f;
+  font-size: 26px;
+  line-height: 1.4;
 }
 
 p {
-  font-size: 17px;
-  line-height: 1.75;
+  color: #986575;
+  line-height: 1.7;
 }
 
-.soft {
-  color: #a36b79;
+button {
+  border: none;
+  border-radius: 25px;
+  padding: 12px 23px;
+  background: #c51e43;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.secondary {
+  background: #ffe5ec;
+  color: #c51e43;
 }
 
 .buttons {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
-  flex-wrap: wrap;
-  min-height: 100px;
+  gap: 14px;
   margin-top: 18px;
+  min-height: 48px;
 }
 
-button {
-  border: none;
-  padding: 14px 23px;
-  border-radius: 30px;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background .2s;
-}
-
-.yes {
-  background: #d82f54;
-  color: white;
+.dodge {
   position: relative;
-  z-index: 5;
-  touch-action: manipulation;
 }
 
-.no {
-  background: #fbe4eb;
-  color: #92223e;
+/* GIFT GRID: 2 COLUMNS x 3 ROWS */
+
+.gift-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  max-width: 310px;
+  margin: 20px auto;
 }
 
-.next {
-  background: #d82f54;
-  color: white;
-  margin-top: 12px;
+.gift {
+  min-height: 115px;
+  background: white;
+  color: #c51e43;
+  border: 1px solid #ffd0dc;
+  border-radius: 18px;
+  padding: 10px;
+  box-shadow: 0 3px 12px #f5dce3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  animation: giftFloat 2s infinite ease-in-out;
 }
 
-.hidden {
-  display: none !important;
+.gift:nth-child(even) {
+  animation-delay: .4s;
 }
 
-#result {
-  color: #9f233f;
-  font-size: 18px;
-  line-height: 1.8;
-  margin-top: 22px;
-  white-space: pre-line;
+.gift .emoji {
+  font-size: 36px;
 }
 
-.progress {
-  color: #bd788a;
-  font: 11px Arial, sans-serif;
-  letter-spacing: 2px;
-  margin-bottom: 16px;
+.gift span:last-child {
+  font-size: 13px;
 }
 
-.signature {
-  margin-top: 22px;
-  color: #d82f54;
-  font-style: italic;
-  font-size: 20px;
+.gift.opened {
+  background: #fff0f4;
+  border-color: #c51e43;
 }
 
-footer {
-  text-align: center;
-  color: #bb8592;
-  font: 10px Arial, sans-serif;
-  letter-spacing: 2px;
-  margin-top: 25px;
+@keyframes giftFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
 }
 
-@media (max-width: 380px) {
-  .card { padding: 26px 15px; }
-  .buttons { gap: 10px; }
+/* GIFT MESSAGE POPUP */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: #0005;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 330px;
+  background: #fffafa;
+  border-radius: 22px;
+  padding: 25px 20px;
+  box-shadow: 0 5px 25px #0002;
+  animation: popIn .3s ease;
+}
+
+.modal-card .emoji {
+  font-size: 42px;
+}
+
+@keyframes popIn {
+  from { transform: scale(.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* CUTE HUGGING ANIMATION */
+
+.couple {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 25px 0;
+}
+
+.cutie {
+  font-size: 75px;
+  margin: -5px;
+  filter: drop-shadow(0 4px 2px #f1dce2);
+  animation: cuddle 1.4s infinite ease-in-out;
+}
+
+.cutie:nth-child(2) {
+  animation-delay: .2s;
+}
+
+@keyframes cuddle {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-7px) rotate(5deg); }
+}
+
+.kiss {
+  position: absolute;
+  font-size: 23px;
+  animation: kissFloat 1.5s infinite ease-in-out;
+}
+
+.kiss.one {
+  top: -12px;
+  left: 25%;
+}
+
+.kiss.two {
+  top: 0;
+  right: 25%;
+  animation-delay: .5s;
+}
+
+.kiss.three {
+  top: -35px;
+  left: 48%;
+  animation-delay: .8s;
+}
+
+@keyframes kissFloat {
+  0%, 100% { transform: translateY(0) scale(.8); }
+  50% { transform: translateY(-13px) scale(1.15); }
+}
+
+/* RAINING HEARTS */
+
+#heartRain {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.falling-heart {
+  position: absolute;
+  top: -35px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: .15;
+  }
+}
+
+/* FINAL I LOVE YOU JANN ANIMATION */
+
+.final-cutie {
+  font-size: 68px;
+  margin: 20px 0 5px;
+  animation: struggle 1.2s infinite ease-in-out;
+}
+
+@keyframes struggle {
+  0%, 100% { transform: rotate(-5deg) translateY(0); }
+  25% { transform: rotate(5deg) translateY(-4px); }
+  50% { transform: rotate(-6deg) translateY(2px); }
+  75% { transform: rotate(5deg) translateY(-3px); }
+}
+
+.big-sign {
+  width: min(95%, 350px);
+  min-height: 110px;
+  padding: 18px 8px;
+  margin: 10px auto;
+  background: white;
+  border: 3px solid #ffc4d2;
+  border-radius: 18px;
+  box-shadow: 0 5px 15px #f4cdd7;
+  color: #c51e43;
+  font-size: clamp(22px, 6vw, 38px);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: bottom center;
+  animation: lift 2.5s infinite ease-in-out;
+}
+
+@keyframes lift {
+  0%, 100% { transform: rotate(5deg) translateY(7px); }
+  30% { transform: rotate(-5deg) translateY(-3px); }
+  45% { transform: rotate(4deg) translateY(5px); }
+  65% { transform: rotate(-2deg) translateY(-6px); }
+}
+
+.letter {
+  width: 100%;
+  max-width: 500px;
+  text-align: left;
+  line-height: 1.85;
+  color: #986575;
+}
+
+@media (max-width: 350px) {
+  .gift-grid {
+    gap: 9px;
+    max-width: 280px;
+  }
+
+  .gift {
+    min-height: 100px;
+  }
+
+  h1 {
+    font-size: 23px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<span class="heart" style="left:8%;animation-delay:0s">♥</span>
-<span class="heart" style="left:27%;animation-delay:3s">♡</span>
-<span class="heart" style="left:76%;animation-delay:1s">♥</span>
-<span class="heart" style="left:91%;animation-delay:5s">♡</span>
+<div id="heartRain"></div>
 
-<main>
-<div class="card">
-  <div class="top-heart">❤️</div>
-  <div class="tag">A tiny question for you</div>
+<!-- PAGE 1: SIMPLE QUESTION -->
 
-  <div id="quiz">
-    <div class="progress" id="progress">QUESTION 1 OF 6</div>
-    <h1 id="question">Baby, are you angry with me? 🥺</h1>
-    <p class="soft" id="hint">Choose honestly, Kuchu… 🤭</p>
+<section class="page active" id="page1">
+  <div style="font-size:25px;">🤍</div>
 
-    <div class="buttons" id="buttons">
-      <button class="yes" id="yes" onclick="answerYes()">Yes 😒</button>
-      <button class="no" id="no" onclick="answerNo()">No, baby ❤️</button>
-    </div>
+  <h1>Baby, are you angry with me? 🥺</h1>
+
+  <div class="buttons">
+    <button class="dodge"
+      onpointerenter="dodge(this)"
+      ontouchstart="dodge(this)">
+      Yes 😤
+    </button>
+
+    <button class="secondary" onclick="goPage(2)">
+      No 🥹
+    </button>
+  </div>
+</section>
+
+<!-- PAGE 2: GIFT QUESTION -->
+
+<section class="page" id="page2">
+  <div style="font-size:28px;">🎀</div>
+
+  <h1>Will you accept my gifts, baby? 🎁</h1>
+
+  <div class="buttons">
+    <button onclick="goPage(3)">Yes, my baby 🤍</button>
+
+    <button class="secondary dodge"
+      onpointerenter="dodge(this)"
+      ontouchstart="dodge(this)">
+      No 🙈
+    </button>
+  </div>
+</section>
+
+<!-- PAGE 3: SIX GIFTS IN 2 x 3 -->
+
+<section class="page" id="page3">
+  <h1>For my Jannnn 💌</h1>
+
+  <p>Open all six gifts, baby. Each one is from my heart. 🤍</p>
+
+  <div class="gift-grid">
+
+    <button class="gift" onclick="openGift(0,this)">
+      <span class="emoji">🎁</span>
+      <span>Gift 1</span>
+    </button>
+
+    <button class="gift" onclick="openGift(1,this)">
+      <span class="emoji">💝</span>
+      <span>Gift 2</span>
+    </button>
+
+    <button class="gift" onclick="openGift(2,this)">
+      <span class="emoji">🧸</span>
+      <span>Gift 3</span>
+    </button>
+
+    <button class="gift" onclick="openGift(3,this)">
+      <span class="emoji">💌</span>
+      <span>Gift 4</span>
+    </button>
+
+    <button class="gift" onclick="openGift(4,this)">
+      <span class="emoji">🌷</span>
+      <span>Gift 5</span>
+    </button>
+
+    <button class="gift" onclick="openGift(5,this)">
+      <span class="emoji">💋</span>
+      <span>Gift 6</span>
+    </button>
+
   </div>
 
-  <div id="result" class="hidden"></div>
-  <button id="next" class="next hidden" onclick="nextQuestion()">Next question 💌</button>
-  <button id="restart" class="no hidden" onclick="restartQuiz()">Read again ❤️</button>
+  <button onclick="goPage(4); rainHearts(25);">
+    One more surprise 🤍
+  </button>
+</section>
 
-  <div class="signature">Made with love, just for you ♡</div>
+<!-- GIFT POPUP -->
+
+<div class="modal" id="giftModal" onclick="outsideClose(event)">
+  <div class="modal-card">
+    <div class="emoji" id="giftEmoji">💝</div>
+
+    <h1 id="giftTitle">For you, baby</h1>
+
+    <p id="giftMessage"></p>
+
+    <button onclick="closeGift()">Awww, baby 🥹🤍</button>
+  </div>
 </div>
 
-<footer>YOUR GIRL · YOUR KUCHU · YOUR LITTLE LOVE STORY</footer>
-</main>
+<!-- PAGE 4: HUGS AND KISSES -->
+
+<section class="page" id="page4">
+  <h1>Come here, my baby 🥺🤍</h1>
+
+  <p>You deserve the biggest hug and a million kisses!</p>
+
+  <div class="couple">
+    <span class="kiss one">💋</span>
+    <span class="kiss two">💕</span>
+    <span class="kiss three">😘</span>
+
+    <span class="cutie">🐻‍❄️</span>
+    <span class="cutie">🐻‍❄️</span>
+  </div>
+
+  <h1>Hugggg and kissessss! 💋</h1>
+
+  <p>
+    Imagine me holding you so tightly that I never want to let go. 🤍
+  </p>
+
+  <button onclick="goPage(5); rainHearts(45);">
+    Read my heart, Jann 💌
+  </button>
+</section>
+
+<!-- PAGE 5: LOVE LETTER -->
+
+<section class="page" id="page5">
+  <div style="font-size:28px;">💌</div>
+
+  <h1>To my favourite person, my Jannnn 🤍</h1>
+
+  <div class="letter">
+
+    <p>
+      Baby, first of all, I want you to know how much you mean to me.
+      You are not just my boyfriend; you are the person my heart keeps
+      choosing, even on the days when things don't go perfectly between us.
+    </p>
+
+    <p>
+      I know sometimes we fight, misunderstand each other, or get upset
+      over little things. Sometimes I become quiet or emotional when
+      something hurts me. It's never because I love you any less.
+      It's because you matter to me so much that even little things can
+      touch my heart deeply.
+    </p>
+
+    <p>
+      I'm genuinely sorry for the times I've hurt you, made you sad,
+      or irritated you. I never want to be the reason behind your bad
+      days. I'll try to express myself better, tease you a little less
+      when you need peace, and understand your feelings too.
+    </p>
+
+    <p>
+      But baby, please understand that sometimes I get emotional because
+      I love you so much. When something feels off, I want us to talk
+      about it rather than hide it inside. I don't want us to be perfect.
+      I just want us to keep understanding each other.
+    </p>
+
+    <p>
+      You are my cutest person, my favourite notification, my comfort,
+      my soft place, and the one I want to share my happiest and hardest
+      days with. Even when I'm being dramatic, clingy, or a little
+      annoying, please remember there's a heart behind all that which
+      loves you with everything it has. 🥹
+    </p>
+
+    <p>
+      I want us to keep choosing each other—not only when everything is
+      sweet and easy, but also when we disagree, when we're tired, and
+      when we need a little patience. I want us to learn, grow, laugh,
+      forgive, and make beautiful memories together.
+    </p>
+
+    <p>
+      So please don't stay angry with me for too long, my baby.
+      Come here and let me hug you. Let me kiss your forehead, hold your
+      hand, and remind you that you're so precious to me.
+    </p>
+
+    <p>
+      I'm not promising to be perfect. I'm promising to keep trying,
+      keep caring, and keep loving you honestly. You are so special to
+      me, and I hope I can make you feel loved the way you deserve.
+    </p>
+
+    <p style="text-align:center;color:#c51e43;font-weight:bold;">
+      I love you today, tomorrow, and through all our little ups and
+      downs. Always my favourite boy. Always my Jannnn. 🤍💋
+    </p>
+
+  </div>
+
+  <button onclick="goPage(6); rainHearts(60);">
+    One last thing, Jann... 🥺
+  </button>
+</section>
+
+<!-- PAGE 6: THE BIG I LOVE YOU JANN SIGN -->
+
+<section class="page" id="page6">
+  <p>Look what this tiny cutie wants to tell you... 🤍</p>
+
+  <div class="final-cutie">🐻‍❄️</div>
+
+  <div class="big-sign">
+    I LOVE YOU JANN ❤️
+  </div>
+
+  <p>
+    It's so heavy because my love for you is HUGE! 🥹
+  </p>
+
+  <p style="max-width:330px;">
+    This little cutie will keep trying to lift it just to show you
+    how much you mean to me. 🤍💋
+  </p>
+
+  <button onclick="rainHearts(80); this.textContent='FOREVER YOURS, JANN 💋🤍';">
+    Hug me nowww 🥺
+  </button>
+</section>
 
 <script>
-const questions = [
+function goPage(number) {
+  document.querySelectorAll(".page").forEach(function(page) {
+    page.classList.remove("active");
+  });
+
+  document.getElementById("page" + number).classList.add("active");
+}
+
+function dodge(button) {
+  button.style.position = "fixed";
+
+  var maxX = Math.max(5, window.innerWidth - button.offsetWidth - 10);
+  var maxY = Math.max(5, window.innerHeight - button.offsetHeight - 10);
+
+  button.style.left = Math.random() * maxX + "px";
+  button.style.top = Math.random() * maxY + "px";
+}
+
+/* SIX PERSONAL GIFT MESSAGES */
+
+var gifts = [
   {
-    q: "Baby, are you angry with me? 🥺",
-    hint: "Choose honestly, Kuchu… 🤭",
-    yes: "Okay, baby… I'll give you a little space. I'm here whenever you're ready to talk. ❤️",
-    no: "Awww, come here then! 🥹❤️ I have some things to ask you.",
-    runaway: true
+    emoji: "🤍",
+    title: "A little piece of my heart",
+    message: "If I could give you one thing forever, baby, it would be the feeling of knowing how deeply you are loved by me. My heart is happiest when it knows we're okay."
   },
   {
-    q: "Do you know that your little reactions can affect me? 🥹",
-    hint: "Don't act innocent now, mister 🤭",
-    yes: "Then please remember to be a little gentle with my heart, baby. I love you so much. 💗",
-    no: "Well, now you know! My heart is a little sensitive when it comes to you. 🥺❤️"
+    emoji: "🫂",
+    title: "Unlimited hugs",
+    message: "This gift gives you unlimited hugs from me. No expiry date, no limits, and absolutely no returning it! Whenever you need comfort, imagine me holding you close."
   },
   {
-    q: "When I get emotional, do you know why? 💌",
-    hint: "Here's a tiny hint: it's you.",
-    yes: "Exactly, baby. Your words matter to me because YOU matter to me. ❤️",
-    no: "It's because I care about us, silly. I don't want to fight; I want us to understand each other. 🫶"
+    emoji: "🧸",
+    title: "Your personal teddy",
+    message: "Whenever the world feels too much, imagine me hugging you tightly and reminding you that you are precious, loved, and never someone I take for granted."
   },
   {
-    q: "Would you listen to me even when I'm struggling to explain my feelings? 🥺",
-    hint: "I promise I'll try to listen to you too.",
-    yes: "That's all my heart wants sometimes: patience, understanding, and a little reassurance. 💗",
-    no: "Aww, baby, let's try to be patient with each other. Both our feelings deserve to be heard. ❤️"
+    emoji: "💌",
+    title: "My little apology",
+    message: "I'm sorry for the moments when I hurt you or make you sad. I never want my love to feel like a burden. I want us to keep learning how to love each other better."
   },
   {
-    q: "Do you know my favourite place to be? 🫣",
-    hint: "Guess, my love…",
-    yes: "Right where I feel loved, safe, and close to you. 🥹💕",
-    no: "It's wherever I can be close to you and feel at peace. Now you know, mister! 🤭"
+    emoji: "🌷",
+    title: "A promise from me",
+    message: "I promise to keep trying, listening, understanding, and choosing us. We don't need to be perfect to build something beautiful. I want us to grow together, baby."
   },
   {
-    q: "One last question, my Kuchu… will you keep choosing us? ❤️",
-    hint: "Not just on easy days, but on the difficult ones too.",
-    yes: "Come hereee! 🥹❤️ I don't need us to be perfect. I want us to keep learning, communicating, and caring for each other.",
-    no: "I'll still hope we can keep choosing kindness and understanding. Love should feel safe for both of us. 💗"
+    emoji: "💋",
+    title: "The biggest gift",
+    message: "It's me, silly! My love, my cuddles, my kisses, my silly teasing, and my heart. Everything I have to give you with love. I LOVE YOU JANN! 🤍"
   }
 ];
 
-let current = 0;
-let yesEscapes = 0;
+function openGift(index, button) {
+  document.getElementById("giftEmoji").textContent =
+    gifts[index].emoji;
 
-const question = document.getElementById("question");
-const hint = document.getElementById("hint");
-const yesButton = document.getElementById("yes");
-const noButton = document.getElementById("no");
-const buttons = document.getElementById("buttons");
-const result = document.getElementById("result");
-const nextButton = document.getElementById("next");
-const restartButton = document.getElementById("restart");
-const progress = document.getElementById("progress");
+  document.getElementById("giftTitle").textContent =
+    gifts[index].title;
 
-function moveYes(event) {
-  if (current !== 0) return;
+  document.getElementById("giftMessage").textContent =
+    gifts[index].message;
 
-  if (event) event.preventDefault();
+  document.getElementById("giftModal").classList.add("show");
 
-  yesEscapes++;
-
-  if (yesEscapes >= 5) {
-    hint.textContent = "HAHAHA 🤭 the button is shy, just like you!";
-    yesButton.style.transform = "none";
-    yesButton.style.position = "relative";
-    yesButton.style.left = "0";
-    yesButton.style.top = "0";
-    return;
-  }
-
-  const area = buttons.getBoundingClientRect();
-  const maxX = Math.max(0, area.width - yesButton.offsetWidth);
-  const maxY = 65;
-
-  yesButton.style.position = "fixed";
-  yesButton.style.left = Math.max(8, Math.random() * maxX + area.left) + "px";
-  yesButton.style.top = Math.max(8, Math.random() * maxY + area.top) + "px";
+  button.classList.add("opened");
 }
 
-yesButton.addEventListener("pointerenter", moveYes);
-yesButton.addEventListener("touchstart", function(event) {
-  if (current === 0) moveYes(event);
-}, { passive: false });
-
-function answerYes() {
-  showAnswer("yes");
+function closeGift() {
+  document.getElementById("giftModal").classList.remove("show");
 }
 
-function answerNo() {
-  showAnswer("no");
-}
-
-function showAnswer(type) {
-  const item = questions[current];
-
-  question.textContent = type === "yes" ? "A little message for you ❤️" : "A little message for you 💗";
-  hint.classList.add("hidden");
-  buttons.classList.add("hidden");
-  progress.classList.add("hidden");
-
-  result.textContent = item[type];
-  result.classList.remove("hidden");
-
-  if (current === questions.length - 1) {
-    nextButton.classList.add("hidden");
-    restartButton.classList.remove("hidden");
-  } else {
-    nextButton.classList.remove("hidden");
+function outsideClose(event) {
+  if (event.target.id === "giftModal") {
+    closeGift();
   }
 }
 
-function nextQuestion() {
-  current++;
+/* HEARTS FALLING FROM THE TOP */
 
-  const item = questions[current];
+function rainHearts(amount) {
+  var container = document.getElementById("heartRain");
+  var heartTypes = ["🤍", "💗", "💕", "💖", "❤️"];
 
-  question.textContent = item.q;
-  hint.textContent = item.hint;
-  hint.classList.remove("hidden");
-  progress.textContent = "QUESTION " + (current + 1) + " OF " + questions.length;
-  progress.classList.remove("hidden");
-  buttons.classList.remove("hidden");
-  result.classList.add("hidden");
-  nextButton.classList.add("hidden");
-  restartButton.classList.add("hidden");
+  for (var i = 0; i < amount; i++) {
+    var heart = document.createElement("span");
 
-  yesButton.textContent = "Yes ❤️";
-  yesButton.style.position = "relative";
-  yesButton.style.left = "0";
-  yesButton.style.top = "0";
-  yesButton.style.transform = "none";
+    heart.className = "falling-heart";
+    heart.textContent =
+      heartTypes[Math.floor(Math.random() * heartTypes.length)];
 
-  noButton.textContent = "No 🤭";
-}
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (12 + Math.random() * 17) + "px";
+    heart.style.animationDuration = (3 + Math.random() * 4) + "s";
+    heart.style.animationDelay = (Math.random() * 1.5) + "s";
 
-function restartQuiz() {
-  current = 0;
-  yesEscapes = 0;
+    container.appendChild(heart);
 
-  question.textContent = questions[0].q;
-  hint.textContent = questions[0].hint;
-  hint.classList.remove("hidden");
-  progress.textContent = "QUESTION 1 OF " + questions.length;
-  progress.classList.remove("hidden");
-  buttons.classList.remove("hidden");
-  result.classList.add("hidden");
-  nextButton.classList.add("hidden");
-  restartButton.classList.add("hidden");
-
-  yesButton.textContent = "Yes 😒";
-  noButton.textContent = "No, baby ❤️";
-  yesButton.style.position = "relative";
-  yesButton.style.left = "0";
-  yesButton.style.top = "0";
+    setTimeout(function(item) {
+      item.remove();
+    }, 9000, heart);
+  }
 }
 </script>
 
