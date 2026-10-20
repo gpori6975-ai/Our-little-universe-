@@ -2,123 +2,357 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#100a10">
-<title>Always You, Always Us ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hey, My Love ❤️</title>
+
 <style>
-:root{--bg:#100a10;--panel:#1b111b;--rose:#8d3452;--pink:#f3c5d5;--muted:#d7b5c4;--line:#583044}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(ellipse at top,#2a1425 0%,var(--bg) 55%);color:#fff0f5;font-family:Georgia,"Times New Roman",serif;text-align:center}
-header{padding:22px 12px 10px;color:var(--pink);letter-spacing:2.5px;font:12px Arial,sans-serif}
-main{max-width:680px;margin:auto;padding:12px 16px 35px}
-.hero{padding:34px 20px 30px;border:1px solid var(--line);border-radius:26px;background:linear-gradient(145deg,#2a1525,#140d16 70%);box-shadow:0 15px 50px #0005;overflow:hidden}
-.eyebrow{font:11px Arial,sans-serif;letter-spacing:3px;color:#e3a5ba}
-.rose{font-size:56px;filter:drop-shadow(0 0 15px #a83c5c66)}
-h1{font-size:clamp(34px,9vw,52px);line-height:1.12;font-weight:normal;color:#f8d9e4;margin:15px 0}
-h2{font-weight:normal;color:var(--pink);font-size:27px;margin-top:0}
-p{line-height:1.85;color:#ead4de}
-.subtitle{color:var(--muted);font-style:italic}
-button{border:1px solid #b85b7a;border-radius:30px;padding:14px 21px;background:linear-gradient(135deg,#a54161,#69263f);color:white;font-size:15px;cursor:pointer;margin:9px 0;box-shadow:0 7px 20px #0003}
-button:focus-visible{outline:2px solid #ffd3e1;outline-offset:4px}
-section{margin-top:20px;padding:25px 20px;border:1px solid #422638;border-radius:22px;background:linear-gradient(145deg,#1d121e,#150e16)}
-.hidden{display:none!important}
-.letter{text-align:left}
-.letter p{margin:0 0 17px}
-.signature{text-align:right;color:var(--pink);font-style:italic}
-.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:15px}
-.gallery img{width:100%;height:190px;object-fit:cover;border-radius:14px;border:1px solid var(--line);background:#241622;color:#d7b5c4}
-.hint{font:12px/1.6 Arial,sans-serif;color:#c6a6b5}
-.note-box{min-height:58px;color:#f6cad9;font-style:italic}
-footer{padding:28px 10px 8px;color:#d6a4b7;font-size:14px}
-.heart{position:fixed;bottom:-35px;animation:float 5s linear forwards;pointer-events:none;z-index:5}
-@keyframes float{to{transform:translateY(-110vh) rotate(30deg);opacity:0}}
-@media(max-width:380px){main{padding:10px}.hero{padding:28px 14px}.gallery img{height:145px}section{padding:21px 15px}}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #fffafa;
+  color: #57232f;
+  font-family: Georgia, serif;
+  overflow-x: hidden;
+}
+
+.heart {
+  position: fixed;
+  bottom: -30px;
+  color: #e94d70;
+  pointer-events: none;
+  animation: float 8s linear infinite;
+  z-index: 0;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); opacity: 0; }
+  15% { opacity: .6; }
+  100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+main {
+  max-width: 600px;
+  margin: auto;
+  min-height: 100vh;
+  padding: 24px 20px 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  background: white;
+  border: 1px solid #f5d5dd;
+  border-radius: 28px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 12px 45px #b72d4c12;
+}
+
+.top-heart {
+  font-size: 45px;
+  margin-bottom: 12px;
+}
+
+.tag {
+  font: 11px Arial, sans-serif;
+  letter-spacing: 3px;
+  color: #d94c6c;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: clamp(30px, 8vw, 43px);
+  font-weight: normal;
+  line-height: 1.2;
+  margin: 18px 0;
+  color: #9f233f;
+}
+
+p {
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.soft {
+  color: #a36b79;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  min-height: 100px;
+  margin-top: 18px;
+}
+
+button {
+  border: none;
+  padding: 14px 23px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.yes {
+  background: #d82f54;
+  color: white;
+  position: relative;
+  z-index: 5;
+  touch-action: manipulation;
+}
+
+.no {
+  background: #fbe4eb;
+  color: #92223e;
+}
+
+.next {
+  background: #d82f54;
+  color: white;
+  margin-top: 12px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#result {
+  color: #9f233f;
+  font-size: 18px;
+  line-height: 1.8;
+  margin-top: 22px;
+  white-space: pre-line;
+}
+
+.progress {
+  color: #bd788a;
+  font: 11px Arial, sans-serif;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.signature {
+  margin-top: 22px;
+  color: #d82f54;
+  font-style: italic;
+  font-size: 20px;
+}
+
+footer {
+  text-align: center;
+  color: #bb8592;
+  font: 10px Arial, sans-serif;
+  letter-spacing: 2px;
+  margin-top: 25px;
+}
+
+@media (max-width: 380px) {
+  .card { padding: 26px 15px; }
+  .buttons { gap: 10px; }
+}
 </style>
 </head>
+
 <body>
-<header>♡ MADE WITH LOVE BY PORI ♡</header>
+
+<span class="heart" style="left:8%;animation-delay:0s">♥</span>
+<span class="heart" style="left:27%;animation-delay:3s">♡</span>
+<span class="heart" style="left:76%;animation-delay:1s">♥</span>
+<span class="heart" style="left:91%;animation-delay:5s">♡</span>
+
 <main>
-  <div class="hero">
-    <div class="rose">🌹</div>
-    <div class="eyebrow">JUST FOR MY KUCHU</div>
-    <h1>Always You,<br>Always Us</h1>
-    <p class="subtitle">A little world made for my favourite person.</p>
-    <p>For my babyyyy, Avay (Kuchu) 🥹❤️‍🩹🧸</p>
-    <button onclick="openLetter()">Open your little surprise ❤️</button>
-    <p class="hint">Made with a heart that chooses you, every day.</p>
+<div class="card">
+  <div class="top-heart">❤️</div>
+  <div class="tag">A tiny question for you</div>
+
+  <div id="quiz">
+    <div class="progress" id="progress">QUESTION 1 OF 6</div>
+    <h1 id="question">Baby, are you angry with me? 🥺</h1>
+    <p class="soft" id="hint">Choose honestly, Kuchu… 🤭</p>
+
+    <div class="buttons" id="buttons">
+      <button class="yes" id="yes" onclick="answerYes()">Yes 😒</button>
+      <button class="no" id="no" onclick="answerNo()">No, baby ❤️</button>
+    </div>
   </div>
 
-  <section id="letter" class="letter hidden">
-    <h2>My babyyyy, 🥹❤️‍🩹🧸</h2>
-    <p>No matter how many fights we have or how many times we misunderstand each other, please never doubt the love and care I have for you. Whatever happens, my love for you never changes. The things you do, the situations you go through, or the mistakes you make have never been the reason for me to love you any less. Sometimes, yes, little things do hurt me, but it's never because I want to fight with you or make things difficult between us. I get emotional because I care about you so deeply, and sometimes the way you react to certain things affects me more than I can explain. It's not that I'm always angry with you, baby; sometimes I'm just hurt, overwhelmed, and unable to express what's going on inside my heart properly. 🥺💗</p>
-    <p>And I'm genuinely sorry for being a little chilly sometimes, for becoming quiet, or for not knowing how to handle my emotions the right way. I'm still learning, and I know I have my flaws too. But please understand that when I tell you something feels off or when I express that something has hurt me, it's never because I want to find faults in you. It's because I love you so much that even the little things between us matter to me. I don't want to hide my feelings from you or pretend that everything is okay when my heart feels otherwise. I want us to be able to talk about things, understand each other, and make things better together. Maybe expressing my feelings like this is one of the ways I show my love, because you're so important to me that I can't simply act like nothing affects me. 🫶🏻❤️</p>
-    <p>More than anything, baby, I just want us to be okay. I want us to love each other peacefully, to have more hugs than arguments, more laughter than tears, more reassurance than misunderstandings, and more beautiful memories than painful moments. I don't expect us to be perfect, and I know we'll have difficult days, but I want us to keep choosing each other even on those days. I want us to learn how to understand each other's hearts instead of hurting each other without meaning to. I'll try my best to become a better person for you, to handle my emotions more gently, to communicate better, and to love you in ways that make you feel safe and happy. And I hope we both keep growing together, learning from our mistakes, and making our relationship more beautiful with time. 🥹💋</p>
-    <p>I don't want to win our fights, baby; I want us to win against the misunderstandings that come between us. I don't want distance between our hearts. I want to be close to you, to understand you better, and to make you feel as loved as you truly are. No matter how emotional I get or how difficult some days become, please remember that you're still my favourite person, the one I care about so much, and the one I want to keep making things work with. I love you on the easy days, on the difficult days, when we're laughing together, and even when we're struggling to understand each other. I just want us to love each other a little softer, listen to each other a little more, and never let small misunderstandings become bigger than the love we share.</p>
-    <p>I love you so, so much, my baby. More than my silly moods can show, more than my words can explain, and more than you probably realise. I don't need us to be perfect; I just want us to be happy, to feel loved, and to keep finding our way back to each other. Always you, always us, and always a little more love every day. 🧿❤️‍🩹🫂💗</p>
-    <p class="signature">Always yours,<br>Your Pori 💋</p>
-  </section>
+  <div id="result" class="hidden"></div>
+  <button id="next" class="next hidden" onclick="nextQuestion()">Next question 💌</button>
+  <button id="restart" class="no hidden" onclick="restartQuiz()">Read again ❤️</button>
 
-  <section>
-    <h2>Our little memory corner 📸</h2>
-    <p>Our moments, our smiles, our little universe.</p>
-    <div class="gallery">
-      <img src="photo1.jpg" alt="Pori and Avay photo 1">
-      <img src="photo2.jpg" alt="Pori and Avay photo 2">
-      <img src="photo3.jpg" alt="Pori and Avay photo 3">
-      <img src="photo4.jpg" alt="Pori and Avay photo 4">
-    </div>
-    <p class="hint">Add your photos to the same repository and name them photo1.jpg, photo2.jpg, photo3.jpg and photo4.jpg. You can use fewer photos too.</p>
-  </section>
+  <div class="signature">Made with love, just for you ♡</div>
+</div>
 
-  <section>
-    <h2>One tiny promise 🧸</h2>
-    <p>We don't have to be perfect. Let's keep learning, listening, laughing, and finding our way back to each other.</p>
-    <button onclick="showPromise()">Tap for a little promise ❤️</button>
-    <p id="promise" class="note-box"></p>
-  </section>
-
-  <section>
-    <h2>Whenever you need a reminder 💌</h2>
-    <p>Tap below, my Kuchu.</p>
-    <button onclick="loveNote()">A little reminder for you</button>
-    <p id="note" class="note-box"></p>
-  </section>
-
-  <footer>
-    <p>Always you, always us. 🧿❤️‍🩹</p>
-    <p>Made with all my love, Pori ♡</p>
-  </footer>
+<footer>YOUR GIRL · YOUR KUCHU · YOUR LITTLE LOVE STORY</footer>
 </main>
+
 <script>
-function openLetter(){
-  document.getElementById('letter').classList.remove('hidden');
-  document.getElementById('letter').scrollIntoView({behavior:'smooth',block:'start'});
-  for(let i=0;i<18;i++){
-    setTimeout(()=>{
-      const h=document.createElement('span');
-      h.className='heart';h.textContent=['❤️','💗','💕','✨'][Math.floor(Math.random()*4)];
-      h.style.left=(Math.random()*94)+'vw';
-      h.style.fontSize=(16+Math.random()*18)+'px';
-      document.body.appendChild(h);
-      setTimeout(()=>h.remove(),5100);
-    },i*130);
+const questions = [
+  {
+    q: "Baby, are you angry with me? 🥺",
+    hint: "Choose honestly, Kuchu… 🤭",
+    yes: "Okay, baby… I'll give you a little space. I'm here whenever you're ready to talk. ❤️",
+    no: "Awww, come here then! 🥹❤️ I have some things to ask you.",
+    runaway: true
+  },
+  {
+    q: "Do you know that your little reactions can affect me? 🥹",
+    hint: "Don't act innocent now, mister 🤭",
+    yes: "Then please remember to be a little gentle with my heart, baby. I love you so much. 💗",
+    no: "Well, now you know! My heart is a little sensitive when it comes to you. 🥺❤️"
+  },
+  {
+    q: "When I get emotional, do you know why? 💌",
+    hint: "Here's a tiny hint: it's you.",
+    yes: "Exactly, baby. Your words matter to me because YOU matter to me. ❤️",
+    no: "It's because I care about us, silly. I don't want to fight; I want us to understand each other. 🫶"
+  },
+  {
+    q: "Would you listen to me even when I'm struggling to explain my feelings? 🥺",
+    hint: "I promise I'll try to listen to you too.",
+    yes: "That's all my heart wants sometimes: patience, understanding, and a little reassurance. 💗",
+    no: "Aww, baby, let's try to be patient with each other. Both our feelings deserve to be heard. ❤️"
+  },
+  {
+    q: "Do you know my favourite place to be? 🫣",
+    hint: "Guess, my love…",
+    yes: "Right where I feel loved, safe, and close to you. 🥹💕",
+    no: "It's wherever I can be close to you and feel at peace. Now you know, mister! 🤭"
+  },
+  {
+    q: "One last question, my Kuchu… will you keep choosing us? ❤️",
+    hint: "Not just on easy days, but on the difficult ones too.",
+    yes: "Come hereee! 🥹❤️ I don't need us to be perfect. I want us to keep learning, communicating, and caring for each other.",
+    no: "I'll still hope we can keep choosing kindness and understanding. Love should feel safe for both of us. 💗"
+  }
+];
+
+let current = 0;
+let yesEscapes = 0;
+
+const question = document.getElementById("question");
+const hint = document.getElementById("hint");
+const yesButton = document.getElementById("yes");
+const noButton = document.getElementById("no");
+const buttons = document.getElementById("buttons");
+const result = document.getElementById("result");
+const nextButton = document.getElementById("next");
+const restartButton = document.getElementById("restart");
+const progress = document.getElementById("progress");
+
+function moveYes(event) {
+  if (current !== 0) return;
+
+  if (event) event.preventDefault();
+
+  yesEscapes++;
+
+  if (yesEscapes >= 5) {
+    hint.textContent = "HAHAHA 🤭 the button is shy, just like you!";
+    yesButton.style.transform = "none";
+    yesButton.style.position = "relative";
+    yesButton.style.left = "0";
+    yesButton.style.top = "0";
+    return;
+  }
+
+  const area = buttons.getBoundingClientRect();
+  const maxX = Math.max(0, area.width - yesButton.offsetWidth);
+  const maxY = 65;
+
+  yesButton.style.position = "fixed";
+  yesButton.style.left = Math.max(8, Math.random() * maxX + area.left) + "px";
+  yesButton.style.top = Math.max(8, Math.random() * maxY + area.top) + "px";
+}
+
+yesButton.addEventListener("pointerenter", moveYes);
+yesButton.addEventListener("touchstart", function(event) {
+  if (current === 0) moveYes(event);
+}, { passive: false });
+
+function answerYes() {
+  showAnswer("yes");
+}
+
+function answerNo() {
+  showAnswer("no");
+}
+
+function showAnswer(type) {
+  const item = questions[current];
+
+  question.textContent = type === "yes" ? "A little message for you ❤️" : "A little message for you 💗";
+  hint.classList.add("hidden");
+  buttons.classList.add("hidden");
+  progress.classList.add("hidden");
+
+  result.textContent = item[type];
+  result.classList.remove("hidden");
+
+  if (current === questions.length - 1) {
+    nextButton.classList.add("hidden");
+    restartButton.classList.remove("hidden");
+  } else {
+    nextButton.classList.remove("hidden");
   }
 }
-function showPromise(){
-  document.getElementById('promise').textContent=
-  'I promise to keep trying, to listen with love, and to remember that it is us against the misunderstanding — always. ❤️🫂';
+
+function nextQuestion() {
+  current++;
+
+  const item = questions[current];
+
+  question.textContent = item.q;
+  hint.textContent = item.hint;
+  hint.classList.remove("hidden");
+  progress.textContent = "QUESTION " + (current + 1) + " OF " + questions.length;
+  progress.classList.remove("hidden");
+  buttons.classList.remove("hidden");
+  result.classList.add("hidden");
+  nextButton.classList.add("hidden");
+  restartButton.classList.add("hidden");
+
+  yesButton.textContent = "Yes ❤️";
+  yesButton.style.position = "relative";
+  yesButton.style.left = "0";
+  yesButton.style.top = "0";
+  yesButton.style.transform = "none";
+
+  noButton.textContent = "No 🤭";
 }
-function loveNote(){
-  const notes=[
-    'You are loved more than you know, my Kuchu. ❤️',
-    'Even on difficult days, you are still my favourite person. 🧸',
-    'Sending you a thousand hugs from your Pori. 🫂💗',
-    'We do not need to be perfect; we just need to keep caring for each other. 🌹',
-    'Always you, always us, and always a little more love every day. 🧿❤️‍🩹'
-  ];
-  document.getElementById('note').textContent=notes[Math.floor(Math.random()*notes.length)];
+
+function restartQuiz() {
+  current = 0;
+  yesEscapes = 0;
+
+  question.textContent = questions[0].q;
+  hint.textContent = questions[0].hint;
+  hint.classList.remove("hidden");
+  progress.textContent = "QUESTION 1 OF " + questions.length;
+  progress.classList.remove("hidden");
+  buttons.classList.remove("hidden");
+  result.classList.add("hidden");
+  nextButton.classList.add("hidden");
+  restartButton.classList.add("hidden");
+
+  yesButton.textContent = "Yes 😒";
+  noButton.textContent = "No, baby ❤️";
+  yesButton.style.position = "relative";
+  yesButton.style.left = "0";
+  yesButton.style.top = "0";
 }
 </script>
+
 </body>
 </html>
